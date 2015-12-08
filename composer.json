@@ -1,0 +1,9 @@
+{
+    "name": "air-php/mapper",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Air\\Mapper\\": "src"
+        }
+    }
+}
