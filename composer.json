@@ -5,5 +5,8 @@
         "psr-4": {
             "Air\\Mapper\\": "src"
         }
+    },
+    "require": {
+        "air-php/database": "~0.1"
     }
 }

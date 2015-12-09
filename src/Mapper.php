@@ -2,21 +2,20 @@
 
 namespace Air\Mapper;
 
-use PDOStatement;
-use PDO;
+use Air\Database;
 
 abstract class Mapper
 {
     /**
-     * @var PDO $databaseConnection A database connection.
+     * @var Database\ConnectionInterface $databaseConnection A database connection.
      */
     protected $databaseConnection;
 
 
     /**
-     * @param PDO $databaseConnection A database connection.
+     * @param Database\ConnectionInterface $databaseConnection A database connection.
      */
-    public function __construct(PDO $databaseConnection)
+    public function __construct(Database\ConnectionInterface $databaseConnection)
     {
         $this->databaseConnection = $databaseConnection;
     }
@@ -25,22 +24,20 @@ abstract class Mapper
     /**
      * Map a PDO statement to an array of model objects.
      *
-     * @param PDOStatement $smt A PDO statement.
+     * @param array $data An array of data.
      * @return array An array of objects.
      */
-    protected function mapToObjects(PDOStatement $smt)
+    protected function mapToObjects($data)
     {
-        $data = [];
+        $output = [];
 
-        $smt->execute();
-
-        if ($smt->rowCount() > 0) {
-            foreach ($smt->fetchAll() as $row) {
-                $data[] = $this->instantiateObject($row);
+        if (count($data) > 0) {
+            foreach ($data as $row) {
+                $output[] = $this->instantiateObject($row);
             }
         }
 
-        return $data;
+        return $output;
     }
 
 
