@@ -3,8 +3,9 @@
 namespace Air\Mapper;
 
 use Air\Database;
+use Doctrine\DBAL\Query\QueryBuilder;
 
-abstract class Mapper
+abstract class Mapper implements MapperInterface
 {
     /**
      * @var Database\ConnectionInterface $databaseConnection A database connection.
@@ -18,6 +19,15 @@ abstract class Mapper
     public function __construct(Database\ConnectionInterface $databaseConnection)
     {
         $this->databaseConnection = $databaseConnection;
+    }
+
+
+    /**
+     * @return QueryBuilder
+     */
+    public function getQueryBuilder()
+    {
+        return $this->databaseConnection->getQueryBuilder();
     }
 
 
