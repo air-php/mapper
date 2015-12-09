@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "air-php/database",
-            "version": "0.1",
+            "version": "0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/air-php/database.git",
-                "reference": "cb67a67792d9f8cc5e38fe477c38e4b703339c4b"
+                "reference": "0053a223f3f59a211286150c5713e2474d3beb85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/air-php/database/zipball/cb67a67792d9f8cc5e38fe477c38e4b703339c4b",
-                "reference": "cb67a67792d9f8cc5e38fe477c38e4b703339c4b",
+                "url": "https://api.github.com/repos/air-php/database/zipball/0053a223f3f59a211286150c5713e2474d3beb85",
+                "reference": "0053a223f3f59a211286150c5713e2474d3beb85",
                 "shasum": ""
             },
             "require": {
@@ -31,7 +31,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2015-12-09 10:10:31"
+            "time": "2015-12-09 11:29:51"
         },
         {
             "name": "doctrine/annotations",

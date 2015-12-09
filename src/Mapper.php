@@ -3,6 +3,7 @@
 namespace Air\Mapper;
 
 use Air\Database;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Query\QueryBuilder;
 
 abstract class Mapper implements MapperInterface
@@ -14,11 +15,19 @@ abstract class Mapper implements MapperInterface
 
 
     /**
-     * @param Database\ConnectionInterface $databaseConnection A database connection.
+     * @var Collection $collection A collection to store objects in.
      */
-    public function __construct(Database\ConnectionInterface $databaseConnection)
+    protected $collection;
+
+
+    /**
+     * @param Database\ConnectionInterface $databaseConnection A database connection.
+     * @param Collection $collection A collection to store objects in.
+     */
+    public function __construct(Database\ConnectionInterface $databaseConnection, Collection $collection)
     {
         $this->databaseConnection = $databaseConnection;
+        $this->collection = $collection;
     }
 
 
@@ -32,22 +41,22 @@ abstract class Mapper implements MapperInterface
 
 
     /**
-     * Map a PDO statement to an array of model objects.
+     * Map a data to a collection of model objects.
      *
      * @param array $data An array of data.
-     * @return array An array of objects.
+     * @return Collection A collection of objects.
      */
     protected function mapToObjects($data)
     {
-        $output = [];
-
+        $this->collection->clear();
+        
         if (count($data) > 0) {
             foreach ($data as $row) {
-                $output[] = $this->instantiateObject($row);
+                $this->collection->add($this->instantiateObject($row));
             }
         }
 
-        return $output;
+        return $this->collection;
     }
 
 
