@@ -49,7 +49,7 @@ abstract class Mapper implements MapperInterface
     protected function mapToObjects($data)
     {
         $this->collection->clear();
-        
+
         if (count($data) > 0) {
             foreach ($data as $row) {
                 $this->collection->add($this->instantiateObject($row));
