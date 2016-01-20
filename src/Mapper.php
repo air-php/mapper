@@ -56,7 +56,7 @@ abstract class Mapper implements MapperInterface
             }
         }
 
-        return $this->collection;
+        return clone $this->collection;
     }
 
 
