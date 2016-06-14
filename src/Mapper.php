@@ -44,15 +44,16 @@ abstract class Mapper implements MapperInterface
      * Map a data to a collection of model objects.
      *
      * @param array $data An array of data.
+     * @param string $function A customised function to call when instantiating objects.
      * @return Collection A collection of objects.
      */
-    protected function mapToObjects($data)
+    protected function mapToObjects($data, $function = 'instantiateObject')
     {
         $this->collection->clear();
 
         if (count($data) > 0) {
             foreach ($data as $row) {
-                $this->collection->add($this->instantiateObject($row));
+                $this->collection->add($this->$function($row));
             }
         }
 
