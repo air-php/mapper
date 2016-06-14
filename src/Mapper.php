@@ -44,15 +44,20 @@ abstract class Mapper implements MapperInterface
      * Map a data to a collection of model objects.
      *
      * @param array $data An array of data.
+     * @param callable $callable The callable you want to call for each row of data.
      * @return Collection A collection of objects.
      */
-    protected function mapToObjects($data)
+    protected function mapToObjects(array $data, callable $callable = null)
     {
         $this->collection->clear();
 
         if (count($data) > 0) {
             foreach ($data as $row) {
-                $this->collection->add($this->instantiateObject($row));
+                if (is_callable($callable)) {
+                    $this->collection->add(call_user_func($callable, $row));
+                } else {
+                    $this->collection->add($this->instantiateObject($row));
+                }
             }
         }
 
